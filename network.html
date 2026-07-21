@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Network — Patrick Ayrton Hartanto</title>
+<meta name="description" content="A web of skills — how Patrick Ayrton Hartanto's experiences interlock and support each other.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=12">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='35' width='80' height='50' rx='8' fill='%23FFC928'/><circle cx='30' cy='35' r='10' fill='%23FFC928'/><circle cx='70' cy='35' r='10' fill='%23FFC928'/></svg>">
+</head>
+<body class="network-page">
+
+<header class="site-nav">
+  <a class="logo" href="index.html#about" aria-label="Back to the portfolio">
+    <span class="logo-brick" aria-hidden="true"><i></i><i></i></span>
+    <span class="logo-text">PAH</span>
+  </a>
+  <nav>
+    <a href="index.html#about">About</a>
+    <a href="index.html#experiences">Experiences</a>
+    <a href="index.html#skills">Skills &amp; Stack</a>
+    <a href="index.html#projects">Projects</a>
+    <a class="nav-fun active" href="network.html">Network <span aria-hidden="true">✦</span></a>
+  </nav>
+</header>
+
+<main class="network-stage">
+  <canvas id="net-canvas"></canvas>
+  <div class="net-hud">
+    <p class="eyebrow">The network · just for fun</p>
+    <h1>The skill web.</h1>
+    <p class="hint">Hover to trace connections · drag bricks · click to open</p>
+  </div>
+  <ul class="legend" id="net-legend"></ul>
+</main>
+
+<!-- Explainer popup (shown on every visit) -->
+<div class="net-intro" id="net-intro" role="dialog" aria-modal="true" aria-labelledby="net-intro-title">
+  <div class="net-intro-card">
+    <button class="net-intro-close" id="net-intro-close" aria-label="Close explainer">&times;</button>
+    <div class="net-intro-studs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <p class="eyebrow">What is this?</p>
+    <h2 id="net-intro-title">A web of purposeful bricks.</h2>
+    <p>This is a map of how my different skillsets complement each other. Every
+    brick is a real experience; every line snaps it to the skills it built and
+    borrowed from. Together they form one comprehensive skill web — not a pile
+    of random skills, but building blocks curated on purpose, each one
+    supporting the next.</p>
+    <p class="net-intro-tip">Hover a brick to trace its connections. Click it to read the full story.</p>
+  </div>
+</div>
+
+<!-- Focus overlay (click-to-zoom card) -->
+<div class="focus-overlay" id="focus-overlay" role="dialog" aria-modal="true" aria-labelledby="focus-title" hidden>
+  <div class="focus-backdrop" data-close></div>
+  <article class="focus-card" id="focus-card">
+    <div class="focus-studs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <button class="focus-close" data-close aria-label="Close">&times;</button>
+    <div class="focus-scroll">
+      <p class="focus-meta" id="focus-meta"></p>
+      <h3 id="focus-title"></h3>
+      <p class="focus-org" id="focus-org"></p>
+      <ul class="focus-points" id="focus-points"></ul>
+      <div class="focus-links" id="focus-links"></div>
+    </div>
+  </article>
+</div>
+
+<footer class="contact">
+  <p class="eyebrow">The next brick</p>
+  <h2>Let's build something.</h2>
+  <div class="contact-links">
+    <a href="mailto:ayrton@bc.edu">ayrton@bc.edu</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://www.linkedin.com/in/patrick-hartanto/" target="_blank" rel="noopener">linkedin.com/in/patrick-hartanto</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://github.com/ayrton-netizen" target="_blank" rel="noopener">github.com/ayrton-netizen</a>
+  </div>
+  <p class="colophon">Built brick by brick · Boston, MA</p>
+</footer>
+
+<script src="js/data.js?v=12"></script>
+<script src="js/common.js?v=12"></script>
+<script src="js/network.js?v=12"></script>
+</body>
+</html>

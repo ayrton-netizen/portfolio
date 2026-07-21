@@ -96,6 +96,8 @@
 
   const SPAN = (1 / N) * 1.6;
   const startOf = (k) => (k / N) * (1 - SPAN * 0.62);
+  const rowHeight = () =>
+    parseFloat(getComputedStyle(towerEl).getPropertyValue("--rowH")) || 51;
 
   let lastP = -1;
   function render(p) {
@@ -103,6 +105,10 @@
     lastP = p;
 
     const assemble = clamp(p / 0.86, 0, 1);
+    /* Each brick drops in from above its resting spot so it clearly lands ON
+       the stack. The drop scales with brick size so it reads the same at any
+       tower height. Reduce-Motion gets a gentle 1-brick drop, no tilt. */
+    const drop = reduced ? rowHeight() * 1.1 : rowHeight() * 3.2 + 40;
     let landed = 0;
 
     for (const r of rows) {
@@ -112,16 +118,16 @@
 
       if (raw <= 0) {
         r.row.style.opacity = "0";
-        r.row.style.transform = "translateY(-120vh)";
+        r.row.style.transform = `translateY(${-drop}px)`;
       } else {
         const t = landEase(raw);
-        const fall = (1 - t) * -(window.innerHeight * 0.9 + r.k * 60);
-        const tilt = (1 - t) * (r.k % 2 ? 5 : -5);
+        const fall = (1 - t) * -drop;
+        const tilt = reduced ? 0 : (1 - t) * (r.k % 2 ? 4 : -4);
         r.row.style.opacity = String(clamp(raw * 3, 0, 1));
         r.row.style.transform = `translateY(${fall}px) rotate(${tilt}deg)`;
       }
-      r.row.classList.toggle("settled", settled || reduced);
-      r.brick.tabIndex = settled || reduced ? 0 : -1;
+      r.row.classList.toggle("settled", settled);
+      r.brick.tabIndex = settled ? 0 : -1;
     }
 
     const done = assemble >= 1;
@@ -141,13 +147,10 @@
   const debugP = new URLSearchParams(location.search).get("p");
   const frozen = debugP !== null ? clamp(parseFloat(debugP), 0, 1) : null;
 
-  if (reduced && frozen === null) {
-    section.classList.add("static");
-    render(1);
-  } else {
-    const loop = () => { render(frozen !== null ? frozen : progress()); requestAnimationFrame(loop); };
-    requestAnimationFrame(loop);
-  }
+  /* Scroll-drive the reveal for everyone — reduced-motion users get the same
+     brick-by-brick stacking, just as a fade with no falling/tilt. */
+  const loop = () => { render(frozen !== null ? frozen : progress()); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
 
   /* ——— Skills section cards (index page only) ——— */
   const skillGrid = document.getElementById("skill-grid");

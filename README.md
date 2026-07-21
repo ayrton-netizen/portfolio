@@ -28,7 +28,11 @@ python3 -m http.server 4173
 
 ## Deploy
 
-Drop the folder into any static host (Vercel, Netlify, GitHub Pages).
+Repo: https://github.com/ayrton-netizen/portfolio
+
+On Vercel: **Add New → Project → Import `ayrton-netizen/portfolio`** — no build
+step, no framework preset needed (it's plain static files; the defaults work).
+Every `git push` to `main` redeploys automatically.
 
 ## Placeholders to fill in
 
